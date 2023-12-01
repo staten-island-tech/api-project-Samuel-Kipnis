@@ -1,13 +1,13 @@
 import express from 'express';
+import cors from 'cors';
 
-const port = 3000;
+import router from './router';
+
+app.use('/', router);
 
 const app = express();
-
-app.get('/api/getCountryByCoords', (req, res) => {
-	res.json({ message: 'Hello, world!' });
-});
+const port = 8080;
 
 app.listen(port, () => {
-	console.log('Server listening on port', port);
+	console.log('Server running on port', port);
 });

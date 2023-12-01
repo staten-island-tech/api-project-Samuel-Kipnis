@@ -3,7 +3,10 @@
 	// 	console.log(res);
 	// });
 	function getData() {
-		fetch('/').then((res) => console.log(res));
+		fetch('http://localhost:8080/api/getCountryByCoords')
+			.then((res) => res.json())
+			.then((data) => console.log(data));
+		// .then((data) => console.log(data));
 	}
 </script>
 
