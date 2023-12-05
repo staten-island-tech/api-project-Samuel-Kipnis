@@ -1,18 +1,15 @@
-import { url, username } from './base';
+import { url, username } from './apiInfo.js';
 
-async function getCountryByCoords(lat = 30, long = 30) {
-	await fetch(
+async function getCountryByCoords(lat = 30, lng = 30) {
+	const res = await fetch(
 		`${url}/countryCode?` +
 			new URLSearchParams({
 				username,
 				lat,
-				long,
+				lng,
 			})
-	)
-		.then((res) => res.json())
-		.then((data) => {
-			return data;
-		});
+	);
+	return res;
 }
 
 export default getCountryByCoords;
