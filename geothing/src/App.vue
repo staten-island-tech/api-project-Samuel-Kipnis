@@ -1,24 +1,41 @@
 <script setup>
-	function getData() {
-		fetch('http://localhost:8080/api/getCountryByCoords')
+	function getData(lat, lng) {
+		fetch(
+			'http://localhost:8080/api/getCountryByCoords?' +
+				new URLSearchParams({
+					lat,
+					lng,
+				})
+		)
 			.then((res) => res.text())
-			.then((text) => console.log(text));
+			.then((text) => displayData(text));
 	}
 
-	function mouseMove(e) {
-		if (e.target.tagName === 'IMG') {
-			let map = e.target;
-			let mapRect = map.getBoundingClientRect();
-			console.log(mapRect);
-			let xToLongRatio = mapRect.width / 180;
-			console.log(e.clientX / xToLongRatio);
-		}
+	function displayData(data) {
+		const output = document.querySelector('#output');
+		output.textContent = data;
+	}
+
+	function handleSubmit(e) {
+		const form = document.querySelector('#form');
+
+		e.preventDefault();
+		const data = getData(
+			document.querySelector('#lat').value,
+			document.querySelector('#lng').value
+		);
+		console.log(data);
 	}
 </script>
 
 <template>
 	<div @mousemove="mouseMove">
 		<h1 @click="getData">Hello</h1>
-		<img src="https://geology.com/world/world-map.gif" alt="" id="map" />
+		<form action="" id="form" @submit="handleSubmit">
+			<input type="text" placeholder="lat" name="lat" id="lat" />
+			<input type="text" placeholder="lng" name="lng" id="lng" />
+			<button>Submit</button>
+		</form>
+		<h2 id="output"></h2>
 	</div>
 </template>
