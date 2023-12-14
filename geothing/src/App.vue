@@ -1,6 +1,8 @@
 <script setup>
+	import './style.css';
+
 	import { onMounted } from 'vue';
-	import { loadScript } from 'vue-plugin-load-script';
+	import L from 'leaflet';
 
 	function getData(lat, lng) {
 		fetch(
@@ -29,21 +31,20 @@
 		);
 	}
 
-	async function createMap(L) {
-		const map = L.map('map').setView([51.505, -0.09], 13);
-		L.tileLayer('https://tile.openstreetmap.org/50/50/50.png', {
-			maxZoom: 19,
+	function loadMap() {
+		//create map object and set default positions and zoom level
+		const map = L.map('map', {}).setView([0, 0], 1);
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 			attribution:
-				'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+				'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 		}).addTo(map);
+
+		map.on('click', (e) => {
+			getData(e.latlng.lat, e.latlng.lng);
+		});
 	}
 
-	onMounted(async () => {
-		const L = await loadScript(
-			'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
-		);
-		console.log(L);
-	});
+	onMounted(loadMap);
 </script>
 
 <template>
@@ -51,7 +52,7 @@
 		rel="stylesheet"
 		href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 	<div @mousemove="mouseMove">
-		<div id="map" style="{{  height: 500px; width: 500px }}"></div>
+		<div id="map"></div>
 		<h1 @click="getData">Hello</h1>
 		<form action="" id="form" @submit="handleSubmit">
 			<input type="text" placeholder="lat" name="lat" id="lat" />
