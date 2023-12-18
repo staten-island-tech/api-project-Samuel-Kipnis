@@ -11,8 +11,8 @@ const corsOptions = {
 };
 
 app.get('/api/getCountryByCoords', cors(corsOptions), async (req, res) => {
-	console.log(req.params);
-	const country = await getCountryByCoords();
+	const latlng = req.query;
+	const country = await getCountryByCoords(latlng.lat, latlng.lng);
 	res.send(country);
 });
 

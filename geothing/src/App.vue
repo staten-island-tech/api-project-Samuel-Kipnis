@@ -12,8 +12,8 @@
 					lng,
 				})
 		)
-			.then((res) => res.text())
-			.then((text) => displayData(text));
+			.then((res) => res.json())
+			.then((data) => displayData(data.geonames[0].countryName));
 	}
 
 	function displayData(data) {
@@ -21,19 +21,16 @@
 		output.textContent = data;
 	}
 
-	function handleSubmit(e) {
-		const form = document.querySelector('#form');
-
-		e.preventDefault();
-		const data = getData(
-			document.querySelector('#lat').value,
-			document.querySelector('#lng').value
-		);
-	}
-
 	function loadMap() {
 		//create map object and set default positions and zoom level
-		const map = L.map('map', {}).setView([0, 0], 1);
+		const map = L.map('map', {
+			zoomControl: false,
+			maxBoundsViscosity: 1,
+			minZoom: 1,
+		});
+
+		map.setView([0, 0], 1);
+		map.setMaxBounds(map.getBounds());
 		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 			attribution:
 				'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -54,11 +51,6 @@
 	<div @mousemove="mouseMove">
 		<div id="map"></div>
 		<h1 @click="getData">Hello</h1>
-		<form action="" id="form" @submit="handleSubmit">
-			<input type="text" placeholder="lat" name="lat" id="lat" />
-			<input type="text" placeholder="lng" name="lng" id="lng" />
-			<button>Submit</button>
-		</form>
 		<h2 id="output"></h2>
 	</div>
 </template>
