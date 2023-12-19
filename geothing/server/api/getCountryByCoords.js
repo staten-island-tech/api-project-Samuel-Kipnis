@@ -13,14 +13,6 @@ async function getCountryByCoords(lat, lng) {
 
 	console.log(countryCode);
 
-	console.log(
-		`${url}/countryInfoJSON?` +
-			new URLSearchParams({
-				username,
-				country: countryCode,
-			})
-	);
-
 	const countryData = await fetch(
 		`${url}/countryInfoJSON?` +
 			new URLSearchParams({
@@ -28,8 +20,6 @@ async function getCountryByCoords(lat, lng) {
 				country: countryCode,
 			})
 	).then((res) => res.json());
-
-	console.log(countryData);
 
 	return countryData;
 }
