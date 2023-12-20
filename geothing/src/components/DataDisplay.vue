@@ -1,7 +1,7 @@
 <script setup>
-	const props = defineProps(['country']);
+const props = defineProps(["country"]);
 </script>
 
 <template>
-	{{ props.country }}
+  <h1>{{ props.country }}</h1>
 </template>
