@@ -36,7 +36,6 @@
 
 		map.setView([0, 0], 1);
 		map.setMaxBounds(map.getBounds());
-		map.invalidateSize();
 		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 			attribution:
 				'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -58,5 +57,9 @@
 		rel="stylesheet"
 		href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 	<div id="map"></div>
-	<h2 id="output"><DataDisplay :country="countryData" /></h2>
+	<p>{{ countryData }}</p>
+	<h2 id="output">
+		{{ countryData.countryName }}, {{ countryData.continentName }}
+	</h2>
+	<h2 id="output">{{ Number(countryData.areaInSqKm) }}</h2>
 </template>
