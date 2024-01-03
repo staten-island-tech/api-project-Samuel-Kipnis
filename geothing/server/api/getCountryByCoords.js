@@ -20,7 +20,6 @@ async function getCountryByCoords(lat, lng) {
 				country: countryCode,
 			})
 	).then((res) => res.json());
-
 	return countryData;
 }
 
