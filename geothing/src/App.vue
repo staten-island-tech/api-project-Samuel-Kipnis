@@ -317,7 +317,7 @@ onMounted(() => {
       </h1>
       <div class="flex flex-row">
         <div id="map" class="rounded-xl"></div>
-        <div class="rounded-br-lg bg-gray-50 px-3">
+        <div class="rounded-xl bg-gray-50 px-3">
           <h2 class="text-2xl text-center bg-gray-50 border-b-3" id="title">
             Economic Data
           </h2>
@@ -441,7 +441,7 @@ onMounted(() => {
             </tbody>
           </table>
         </div>
-        <div class="rounded-br-lg bg-gray-50 px-3">
+        <div class="rounded-xl bg-gray-50 px-3">
           <h2 class="text-2xl text-center bg-gray-50 border-b-3" id="title">
             Population Data
           </h2>
@@ -564,7 +564,7 @@ onMounted(() => {
             </tbody>
           </table>
         </div>
-        <div class="rounded-br-lg bg-gray-50 px-3">
+        <div class="rounded-xl bg-gray-50 px-3">
           <h2 class="text-2xl text-center bg-gray-50 border-b-3" id="title">
             Data Ratings
           </h2>
