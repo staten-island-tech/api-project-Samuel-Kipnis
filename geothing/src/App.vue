@@ -214,7 +214,6 @@
 			maxBoundsViscosity: 1,
 			minZoom: 1,
 		});
-		//   const newMarker = new L.marker(e.latlng).addTo(map);
 
 		map.setView([0, 0], 1);
 		map.setMaxBounds(map.getBounds());
@@ -223,18 +222,8 @@
 				'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 		}).addTo(map);
 
-		let marker = new L.Marker({
-			lat: 40.5680455,
-			lng: -74.11752987677912,
-		});
-		map.addLayer(marker);
-
 		map.on('click', async (e) => {
 			getLocationData(e.latlng.lat, e.latlng.lng);
-
-			map.removeLayer(marker);
-			marker = new L.Marker(e.latlng);
-			map.addLayer(marker);
 		});
 	}
 
@@ -314,9 +303,6 @@
 <template>
 	<div class="flex flex-row bg-gray-50">
 		<div class="loading"></div>
-		<link
-			rel="stylesheet"
-			href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 		<div class="flex flex-col pb-3 m-auto">
 			<h1
 				class="text-4xl p-3 text-center bg-gray-50 border-b-3 pb-5"
@@ -495,9 +481,7 @@
 									Life Expectancy - Male
 								</th>
 								<td class="px-6 py-4">
-									{{
-										econData.life_expectancy_male || 'N/A'
-									}}
+									{{ econData.life_expectancy_male || 'N/A' }}
 									Years
 								</td>
 							</tr>
