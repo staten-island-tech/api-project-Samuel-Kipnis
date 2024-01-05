@@ -119,7 +119,8 @@ function getLocationData(lat, lon) {
       } else {
         econData.value = {};
         countryData.value = {};
-        console.log("invalid location");
+        load.id = "";
+        document.body.style.pointerEvents = "auto";
       }
     });
 }
@@ -179,10 +180,20 @@ function getCountryData() {
         console.log(percent);
         bar.style.width = percent + "%";
         bar.style.backgroundColor = perc2color(percent);
-
+        if (bar.id === "co2_emissions") {
+          bar.style.backgroundColor = perc2color(100 - percent);
+        }
         load.id = "";
         document.body.style.pointerEvents = "auto";
       });
+    })
+    .catch(() => {
+      const load = document.querySelector(".loading");
+
+      econData.value = {};
+      countryData.value = {};
+      load.id = "";
+      document.body.style.pointerEvents = "auto";
     });
 }
 
@@ -280,6 +291,10 @@ onMounted(() => {
     console.log(percent);
     bar.style.width = percent + "%";
     bar.style.backgroundColor = perc2color(percent);
+
+    if (bar.id === "co2_emissions") {
+      bar.style.backgroundColor = perc2color(100 - percent);
+    }
   });
 });
 </script>
@@ -303,10 +318,7 @@ onMounted(() => {
       <div class="flex flex-row">
         <div id="map" class="rounded-xl"></div>
         <div class="rounded-br-lg bg-gray-50 px-3">
-          <h2
-            class="text-2xl p-3 text-center bg-gray-50 border-b-3 inline"
-            id="title"
-          >
+          <h2 class="text-2xl text-center bg-gray-50 border-b-3" id="title">
             Economic Data
           </h2>
           <table
@@ -430,10 +442,7 @@ onMounted(() => {
           </table>
         </div>
         <div class="rounded-br-lg bg-gray-50 px-3">
-          <h2
-            class="text-2xl p-3 text-center bg-gray-50 border-b-3 inline"
-            id="title"
-          >
+          <h2 class="text-2xl text-center bg-gray-50 border-b-3" id="title">
             Population Data
           </h2>
           <table
@@ -556,10 +565,7 @@ onMounted(() => {
           </table>
         </div>
         <div class="rounded-br-lg bg-gray-50 px-3">
-          <h2
-            class="text-2xl p-3 text-center bg-gray-50 border-b-3 inline"
-            id="title"
-          >
+          <h2 class="text-2xl text-center bg-gray-50 border-b-3" id="title">
             Data Ratings
           </h2>
           <table
